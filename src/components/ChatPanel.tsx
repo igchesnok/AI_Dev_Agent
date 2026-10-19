@@ -6,9 +6,10 @@ interface ChatPanelProps {
   messages: ChatMessage[];
   onSendMessage: (message: string) => void;
   isAgentRunning: boolean;
+  streamingContent?: string;
 }
 
-export default function ChatPanel({ messages, onSendMessage, isAgentRunning }: ChatPanelProps) {
+export default function ChatPanel({ messages, onSendMessage, isAgentRunning, streamingContent }: ChatPanelProps) {
   const [input, setInput] = useState('');
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -117,6 +118,27 @@ export default function ChatPanel({ messages, onSendMessage, isAgentRunning }: C
             )}
           </div>
         ))}
+
+        {/* Streaming content */}
+        {isAgentRunning && streamingContent && (
+          <div className="flex gap-3">
+            <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center flex-shrink-0">
+              <Bot size={14} className="text-white" />
+            </div>
+            <div className="max-w-[85%] rounded-xl px-4 py-3 bg-gray-800/50 border border-purple-500/30 text-gray-200">
+              <div className="flex items-center gap-1 mb-1">
+                <Sparkles size={10} className="text-purple-400 animate-pulse" />
+                <span className="text-[10px] text-purple-400 font-medium">AI генерирует...</span>
+              </div>
+              <div className="text-sm whitespace-pre-wrap leading-relaxed">{streamingContent}</div>
+              <div className="mt-2 flex items-center gap-1">
+                <span className="w-1.5 h-1.5 bg-purple-400 rounded-full animate-pulse" />
+                <span className="w-1.5 h-1.5 bg-purple-400 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }} />
+                <span className="w-1.5 h-1.5 bg-purple-400 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }} />
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       <form onSubmit={handleSubmit} className="p-3 border-t border-gray-800">
