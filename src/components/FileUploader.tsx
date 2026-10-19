@@ -7,9 +7,10 @@ interface FileUploaderProps {
   onProjectLoaded: (files: FileNode[], name: string) => void;
   onLoadSample: () => void;
   onShowSetupGuide?: () => void;
+  onShowFixWorkspace?: () => void;
 }
 
-export default function FileUploader({ onProjectLoaded, onLoadSample, onShowSetupGuide }: FileUploaderProps) {
+export default function FileUploader({ onProjectLoaded, onLoadSample, onShowSetupGuide, onShowFixWorkspace }: FileUploaderProps) {
   const [isLoading, setIsLoading] = useState(false);
 
   const onDrop = useCallback(async (acceptedFiles: File[]) => {
