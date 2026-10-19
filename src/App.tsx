@@ -11,6 +11,7 @@ import ChatPanel from './components/ChatPanel';
 import TestPanel from './components/TestPanel';
 import ActionLog from './components/ActionLog';
 import StatusBar from './components/StatusBar';
+import SetupGuide from './components/SetupGuide';
 import {
   FolderTree, TerminalSquare, FlaskConical, ScrollText,
   PanelLeftClose, PanelLeftOpen, X, RotateCcw
@@ -42,6 +43,7 @@ export default function App() {
   const [phase, setPhase] = useState<AgentPhase>('idle');
   const [showFileTree, setShowFileTree] = useState(true);
   const [rightPanel, setRightPanel] = useState<RightPanel>('terminal');
+  const [showSetupGuide, setShowSetupGuide] = useState(false);
 
   const handleProjectLoaded = useCallback((files: FileNode[], name: string) => {
     setProject({ files, name });
@@ -211,7 +213,16 @@ export default function App() {
   const selectedFileNode = project ? findFile(project.files, selectedFile || '') : null;
 
   if (!project) {
-    return <FileUploader onProjectLoaded={handleProjectLoaded} onLoadSample={handleLoadSample} />;
+    return (
+      <>
+        <FileUploader
+          onProjectLoaded={handleProjectLoaded}
+          onLoadSample={handleLoadSample}
+          onShowSetupGuide={() => setShowSetupGuide(true)}
+        />
+        <SetupGuide isOpen={showSetupGuide} onClose={() => setShowSetupGuide(false)} />
+      </>
+    );
   }
 
   return (

@@ -6,9 +6,10 @@ import { Upload, FolderUp, FileCode, Sparkles } from 'lucide-react';
 interface FileUploaderProps {
   onProjectLoaded: (files: FileNode[], name: string) => void;
   onLoadSample: () => void;
+  onShowSetupGuide?: () => void;
 }
 
-export default function FileUploader({ onProjectLoaded, onLoadSample }: FileUploaderProps) {
+export default function FileUploader({ onProjectLoaded, onLoadSample, onShowSetupGuide }: FileUploaderProps) {
   const [isLoading, setIsLoading] = useState(false);
 
   const onDrop = useCallback(async (acceptedFiles: File[]) => {
@@ -138,6 +139,16 @@ export default function FileUploader({ onProjectLoaded, onLoadSample }: FileUplo
             <span className="text-[11px] text-gray-400">Запуск проекта</span>
           </div>
         </div>
+
+        {onShowSetupGuide && (
+          <button
+            onClick={onShowSetupGuide}
+            className="mt-6 w-full py-2.5 px-4 rounded-xl border border-gray-700 text-gray-400 hover:text-gray-200 hover:border-gray-600 hover:bg-gray-800/30 transition-all text-xs flex items-center justify-center gap-2"
+          >
+            <span>📘</span>
+            Как запустить локально на Windows?
+          </button>
+        )}
       </div>
     </div>
   );
