@@ -8,9 +8,10 @@ interface FileUploaderProps {
   onLoadSample: () => void;
   onShowSetupGuide?: () => void;
   onShowFixWorkspace?: () => void;
+  onShowCapabilities?: () => void;
 }
 
-export default function FileUploader({ onProjectLoaded, onLoadSample, onShowSetupGuide, onShowFixWorkspace }: FileUploaderProps) {
+export default function FileUploader({ onProjectLoaded, onLoadSample, onShowSetupGuide, onShowFixWorkspace, onShowCapabilities }: FileUploaderProps) {
   const [isLoading, setIsLoading] = useState(false);
 
   const onDrop = useCallback(async (acceptedFiles: File[]) => {
@@ -158,6 +159,16 @@ export default function FileUploader({ onProjectLoaded, onLoadSample, onShowSetu
           >
             <span>⚠️</span>
             У меня файл "workspace" без расширения — что делать?
+          </button>
+        )}
+
+        {onShowCapabilities && (
+          <button
+            onClick={onShowCapabilities}
+            className="mt-3 w-full py-2.5 px-4 rounded-xl border border-purple-700/50 bg-purple-900/10 text-purple-400 hover:text-purple-300 hover:border-purple-600 hover:bg-purple-900/20 transition-all text-xs flex items-center justify-center gap-2"
+          >
+            <span>🤖</span>
+            Какие языки и технологии понимает агент?
           </button>
         )}
       </div>
