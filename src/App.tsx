@@ -12,6 +12,7 @@ import TestPanel from './components/TestPanel';
 import ActionLog from './components/ActionLog';
 import StatusBar from './components/StatusBar';
 import SetupGuide from './components/SetupGuide';
+import FixWorkspace from './components/FixWorkspace';
 import {
   FolderTree, TerminalSquare, FlaskConical, ScrollText,
   PanelLeftClose, PanelLeftOpen, X, RotateCcw
@@ -44,6 +45,7 @@ export default function App() {
   const [showFileTree, setShowFileTree] = useState(true);
   const [rightPanel, setRightPanel] = useState<RightPanel>('terminal');
   const [showSetupGuide, setShowSetupGuide] = useState(false);
+  const [showFixWorkspace, setShowFixWorkspace] = useState(true); // Показываем сразу, т.к. у пользователя проблема
 
   const handleProjectLoaded = useCallback((files: FileNode[], name: string) => {
     setProject({ files, name });
@@ -219,8 +221,10 @@ export default function App() {
           onProjectLoaded={handleProjectLoaded}
           onLoadSample={handleLoadSample}
           onShowSetupGuide={() => setShowSetupGuide(true)}
+          onShowFixWorkspace={() => setShowFixWorkspace(true)}
         />
         <SetupGuide isOpen={showSetupGuide} onClose={() => setShowSetupGuide(false)} />
+        <FixWorkspace isOpen={showFixWorkspace} onClose={() => setShowFixWorkspace(false)} />
       </>
     );
   }

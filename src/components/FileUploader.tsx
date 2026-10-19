@@ -150,6 +150,16 @@ export default function FileUploader({ onProjectLoaded, onLoadSample, onShowSetu
             Как запустить локально на Windows?
           </button>
         )}
+
+        {onShowFixWorkspace && (
+          <button
+            onClick={onShowFixWorkspace}
+            className="mt-3 w-full py-2.5 px-4 rounded-xl border border-yellow-700/50 bg-yellow-900/10 text-yellow-400 hover:text-yellow-300 hover:border-yellow-600 hover:bg-yellow-900/20 transition-all text-xs flex items-center justify-center gap-2"
+          >
+            <span>⚠️</span>
+            У меня файл "workspace" без расширения — что делать?
+          </button>
+        )}
       </div>
     </div>
   );
